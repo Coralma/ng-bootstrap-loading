@@ -1,0 +1,34 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+    <script src="../lib/jquery/dist/jquery.js"></script>
+    <script src="../lib/angular/angular.js"></script>
+    <script src="../lib/lodash/lodash.js"></script>
+    <script src="../dist/ng-bootstrap-loading.js"></script>
+    <link rel="stylesheet" href="../dist/ng-bootstrap-loading.css">
+</head>
+<body ng-controller="MyController">
+
+    <button type="btn btn-default" ng-click="startLoading()">Start a Mash</button>
+    <button type="btn btn-default" ng-click="startLoadingWithText()">Start a Mash with Text</button>
+    <ng-boot-loading message="数据加载中..."></ng-boot-loading>
+
+<script type="text/javascript">
+    var myApp = angular.module('myApp', ['ng-bootstrap-loading']);
+    myApp.controller('MyController', ['$scope','$filter','BootLoadingService','$timeout', function($scope, $filter, BootLoadingService,$timeout) {
+        $scope.startLoading = function() {
+            BootLoadingService.start("");
+            $timeout(function() {
+                BootLoadingService.complete();
+            }, 2000);
+        }
+        $scope.startLoadingWithText = function() {
+            BootLoadingService.start("审核报告生产中，请稍后。。。");
+            $timeout(function() {
+                BootLoadingService.complete();
+            }, 12000);
+        }
+    }]);
+</script>
+</body>
+</html>
