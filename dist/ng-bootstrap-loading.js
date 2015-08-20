@@ -9,7 +9,6 @@ angular.module('ng-bootstrap-loading', [])
             link: function (scope, element, attrs) {
                 scope.initMessage = scope.message;
                 BootLoadingService.setLoadingInstance(function(status, msg) {
-                    console.log('run LoadingInstance ' + status);
                     if(status == 1) {
                         if(msg) {
                             scope.message = msg;
