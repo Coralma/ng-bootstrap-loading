@@ -23,7 +23,8 @@
             }, 2000);
         }
         $scope.startLoadingWithText = function() {
-            BootLoadingService.start("审核报告生产中，请稍后。。。");
+            /*BootLoadingService.start("审核报告生产中，请稍后。。。");*/
+            BootLoadingService.start("Validation report generating, please waiting...");
             $timeout(function() {
                 BootLoadingService.complete();
             }, 12000);
