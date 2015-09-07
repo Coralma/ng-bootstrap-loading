@@ -5,17 +5,34 @@
     <script src="../lib/angular/angular.js"></script>
     <script src="../lib/lodash/lodash.js"></script>
     <script src="../dist/ng-bootstrap-loading.js"></script>
+    <script src="common.base64.js"></script>
     <link rel="stylesheet" href="../dist/ng-bootstrap-loading.css">
 </head>
 <body ng-controller="MyController">
 
-    <button type="btn btn-default" ng-click="startLoading()">Start a Mash</button>
-    <button type="btn btn-default" ng-click="startLoadingWithText()">Start a Mash with Text</button>
+    <input type="text" ng-model="value">
+    Code: {{code}}
+    <button type="btn btn-default" ng-click="encode()">Encode</button>
+    <button type="btn btn-default" ng-click="decoder()">Decode</button>
+
+    <div style="margin: 20px 0">
+        <button type="btn btn-default" ng-click="startLoading()">Start a Mash</button>
+        <button type="btn btn-default" ng-click="startLoadingWithText()">Start a Mash with Text</button>
+    </div>
     <ng-boot-loading message="数据加载中..."></ng-boot-loading>
 
 <script type="text/javascript">
     var myApp = angular.module('myApp', ['ng-bootstrap-loading']);
     myApp.controller('MyController', ['$scope','$filter','BootLoadingService','$timeout', function($scope, $filter, BootLoadingService,$timeout) {
+        $scope.value = "Data";
+        $scope.encode = function() {
+            $scope.code = Base64.encoder($scope.value);
+        }
+        $scope.decoder = function() {
+            $scope.code = Base64.decoder($scope.value);
+        }
+
+
         $scope.startLoading = function() {
             BootLoadingService.start("");
             $timeout(function() {
